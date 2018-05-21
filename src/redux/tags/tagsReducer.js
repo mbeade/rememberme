@@ -1,5 +1,5 @@
 
-import { TAGS_CREATE, TAGS_GET_ALLL } from '../actions/tagsActionCreator';
+import { TAGS_CREATE, TAGS_GET_ALLL } from './tagsActionCreator';
 
 const initialState = {
     index: 3,
@@ -11,13 +11,13 @@ export default (state = initialState, action) => {
         case TAGS_GET_ALLL:
             state = {
                 ...state,
-                tags: action.payload
+                tags: action.payload,
+                index: action.payload.length
             }
             break;
         case TAGS_CREATE:
             state = {
-                ...state,
-                index: state.index + 1
+                ...state
             }
             break;
     }

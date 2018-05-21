@@ -1,4 +1,4 @@
-import databaseRef from '../firebase/firebase';
+import databaseRef from '../../firebase/firebase';
 const tagsRef = databaseRef.child("tags");
 
 export const TAGS_GET_ALLL = 'TAGS_GET_ALLL';
