@@ -1,6 +1,7 @@
-import { GET_ALL_ARTICLES } from './articlesActionCreator';
+import { GET_ALL_ARTICLES, CREATE_ARTICLES } from './articlesActionCreator';
 
 const initialSate = {
+    index: 1,
     articles: []
 };
 
@@ -9,7 +10,13 @@ export default (state = initialSate, action) => {
         case GET_ALL_ARTICLES:
             state = {
                 ...state,
-                articles: action.payload
+                articles: action.payload,
+                index: action.payload.length
+            }
+            break;
+        case CREATE_ARTICLES:
+            state = {
+                ...state
             }
             break;
     }

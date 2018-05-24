@@ -15,10 +15,10 @@ export const getAllTags = () => {
     }
 }
 
-export const createTag = (name, key) => {
+export const createTag = (tag, key) => {
     if (key) {
         return (dispatch) => {
-            databaseRef.child(`tags/${key}`).set({ name }, (error) => console.log('Error saving tags!')).then(() => {
+            databaseRef.child(`tags/${key}`).set(tag, (error) => console.log('Error saving tags!')).then(() => {
                 dispatch({
                     type: TAGS_CREATE
                 });
