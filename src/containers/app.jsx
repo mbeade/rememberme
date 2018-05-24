@@ -8,17 +8,25 @@ import { getAllArticles } from '../redux/articles/articlesActionCreator';
 import TagSelection from '../components/tag.selection.component';
 import CreateTag from './tag.create.component';
 import ArticlesList from '../components/articles.list.component';
+import CreateArticle from './article.create.component';
 
 class App extends React.Component {
+
+
+    onItemAddedHandler(event, data) {
+        console.log(data.value);
+    }
 
     render() {
         return <div>
 
-            <TagSelection tags={this.props.tagsList}></TagSelection>
+            <TagSelection tags={this.props.tagsList} onItemAdded={this.onItemAddedHandler.bind(this)}></TagSelection>
 
             <ArticlesList articles={this.props.articles} />
 
             <CreateTag />
+
+            <CreateArticle tagsList={this.props.tagsList} />
 
         </div>
     }

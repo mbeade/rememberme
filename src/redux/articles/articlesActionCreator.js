@@ -18,9 +18,9 @@ export const getAllArticles = () => {
 export const createArticle = (article, key) => {
     if (key) {
         return (dispatch) => {
-            databaseRef.child(`articles/${key}`).set({ article }, (error) => console.log('Error saving articles!')).then(() => {
+            databaseRef.child(`articles/${key}`).set( article , (error) => console.log('Error saving articles!')).then(() => {
                 dispatch({
-                    type: TAGS_ARTICLE
+                    type: CREATE_ARTICLES
                 });
             });
         }

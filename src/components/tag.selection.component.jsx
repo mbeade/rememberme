@@ -4,7 +4,7 @@ import { Dropdown } from 'semantic-ui-react'
 export default (props) => (
     <div>
         <h3>Search</h3>
-        <Dropdown placeholder='Tags' fluid multiple search selection options={
+        <Dropdown placeholder='Tags' multiple search selection options={
             props.tags.map((tag, index) => {
                 return {
                     key: index,
@@ -13,5 +13,5 @@ export default (props) => (
                 }
             })
         }
-        /></div>
+        onChange={props.onItemAdded} /></div>
 )

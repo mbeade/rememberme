@@ -48,15 +48,11 @@ class CreateTag extends React.Component {
 // Redux setup
 const mapStateToProps = (state) =>
     ({
-        tagsList: state.tags.tags,
         nextTagKey: state.tags.index
     });
 
 const mapDispatchToProps = (dispatch) =>
     ({
-        getAllTags: () => {
-            dispatch(getAllTags());
-        },
         createTag: (tag, nextKey) => {
             dispatch(createTag(tag, nextKey));
         }
