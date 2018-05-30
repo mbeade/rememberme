@@ -25,7 +25,7 @@ class CreateArticle extends React.Component {
     }
 
     onSubmitHandler(event) {
-        this.setState({...this.state, dateCreated: new Date()});
+        this.setState({ ...this.state, dateCreated: new Date() });
         console.log(this.state);
 
         this.props.createArticle(this.state, this.props.nextAricleIndex);
@@ -41,7 +41,7 @@ class CreateArticle extends React.Component {
 
     onItemAddedHandler(event, data) {
         console.log(data.value);
-        this.setState({...this.state, tags: data.value});
+        this.setState({ ...this.state, tags: data.value });
     }
 
     render() {
@@ -49,8 +49,6 @@ class CreateArticle extends React.Component {
             <h3>Add Aricles</h3>
 
             <Form onSubmit={this.onSubmitHandler.bind(this)}>
-
-                <TagSelection onItemAdded={this.onItemAddedHandler.bind(this)} tags={this.props.tagsList}></TagSelection>
 
                 <Form.Field>
                     <label>Link</label>
@@ -70,6 +68,11 @@ class CreateArticle extends React.Component {
                 <Form.Field>
                     <label>Image URL</label>
                     <input name="image" value={this.state.image} onChange={this.onInputChange.bind(this)} placeholder='Enter image' />
+                </Form.Field>
+
+                <Form.Field>
+                    <label>Tags</label>
+                    <TagSelection onItemAdded={this.onItemAddedHandler.bind(this)} tags={this.props.tagsList}></TagSelection>
                 </Form.Field>
 
                 <Button primary type='submit'>Submit</Button>
