@@ -10,6 +10,8 @@ import CreateTag from './tag.create.component';
 import ArticlesList from '../components/articles.list.component';
 import CreateArticle from './article.create.component';
 import '../styles.css';
+import { Container } from 'semantic-ui-react'
+import firebase from "firebase";
 
 class App extends React.Component {
 
@@ -18,6 +20,13 @@ class App extends React.Component {
         this.state = {
             articles: []
         }
+
+        // Anonymous auith
+        firebase.auth().signInAnonymously().catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+        });
     }
 
     arrayContainsAnotherArray(needle, haystack) {
@@ -40,14 +49,15 @@ class App extends React.Component {
     render() {
         return <div>
 
-            <TagSelection tags={this.props.tagsList} onItemAdded={this.onItemAddedHandler.bind(this)}></TagSelection>
-
-            <ArticlesList articles={this.state.articles} />
-
-            <CreateTag />
-
-            <CreateArticle tagsList={this.props.tagsList} />
-
+            <Container style={ContainerStyles}>
+                <TagSelection tags={this.props.tagsList} onItemAdded={this.onItemAddedHandler.bind(this)} placeholder="Search using tags!"></TagSelection>
+                <div className="ui divider"></div>
+                <ArticlesList articles={this.state.articles} />
+                <div className="ui divider"></div>
+                <CreateTag />
+                <div className="ui divider"></div>
+                <CreateArticle tagsList={this.props.tagsList} />
+            </Container>
         </div>
     }
 
@@ -55,6 +65,16 @@ class App extends React.Component {
         this.props.getAllTags();
         this.props.getAllArticles();
     }
+}
+
+// Styles
+const ContainerStyles = {
+    margin: '100px'
+
+}
+
+const TagSelectionStyles = {
+    width: '500px'
 }
 
 // Redux setup

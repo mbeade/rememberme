@@ -1,13 +1,29 @@
 import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Label } from 'semantic-ui-react'
+
+const COLORS = [
+    'red'
+    , 'orange'
+    , 'yellow'
+    , 'olive'
+    , 'green'
+    , 'teal'
+    , 'blue'
+    , 'violet'
+    , 'purple'
+    , 'pink'
+    , 'brown'
+    , 'grey'
+    , 'black'
+];
 
 export default ({ articles }) => (
     <div className='cardsContainer'>
         {
-            articles.map(article => {
-                return <Card className='mycard'>
+            !articles.length ? <Label size="massive" color="olive">Nothing here!</Label> : articles.map(article => {
+                return <Card className='mycard' key={article.title + article.link}>
                     <Image src={article.image} />
-                    <Card.Content>
+                    <Card.Content >
                         <Card.Header>
                             {article.title}
                         </Card.Header>
@@ -21,10 +37,13 @@ export default ({ articles }) => (
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
-                            <Icon name='user' />
-                            {JSON.stringify(article.tags)}
-                  </a>
+                        <div>
+                            {
+                                article.tags.map((element, index) => {
+                                    return <Label key={index} as='a' color={COLORS[Math.floor(Math.random() * COLORS.length)]} tag>{element}</Label>
+                                })
+                            }
+                        </div>
                     </Card.Content>
                 </Card >
             })

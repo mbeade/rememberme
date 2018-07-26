@@ -3,6 +3,7 @@ import { Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { createArticle } from '../redux/articles/articlesActionCreator';
 import TagSelection from '../components/tag.selection.component';
+import ImageUploader from './image.uploader.component';
 
 class CreateArticle extends React.Component {
 
@@ -46,14 +47,9 @@ class CreateArticle extends React.Component {
 
     render() {
         return <div>
-            <h3>Add Aricles</h3>
+            <h3>Add a new Article</h3>
 
             <Form onSubmit={this.onSubmitHandler.bind(this)}>
-
-                <Form.Field>
-                    <label>Link</label>
-                    <input name="link" value={this.state.link} onChange={this.onInputChange.bind(this)} placeholder='Enter link' />
-                </Form.Field>
 
                 <Form.Field>
                     <label>Title</label>
@@ -61,21 +57,25 @@ class CreateArticle extends React.Component {
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Description</label>
+                    <label>What is this about?</label>
                     <input name="description" value={this.state.description} onChange={this.onInputChange.bind(this)} placeholder='Enter description' />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Image URL</label>
-                    <input name="image" value={this.state.image} onChange={this.onInputChange.bind(this)} placeholder='Enter image' />
+                    <label>Article URL</label>
+                    <input name="link" value={this.state.link} onChange={this.onInputChange.bind(this)} placeholder='Enter link' />
                 </Form.Field>
-
+                <div className="ui divider"></div>
+                <Form.Field>
+                    <ImageUploader></ImageUploader>
+                </Form.Field>
+                <div className="ui divider"></div>
                 <Form.Field>
                     <label>Tags</label>
-                    <TagSelection onItemAdded={this.onItemAddedHandler.bind(this)} tags={this.props.tagsList}></TagSelection>
+                    <TagSelection onItemAdded={this.onItemAddedHandler.bind(this)} tags={this.props.tagsList} placeholder="Select your tags"></TagSelection>
                 </Form.Field>
 
-                <Button primary type='submit'>Submit</Button>
+                <Button basic type='submit' color='teal'>Save Article</Button>
             </Form>
         </div>
     }

@@ -3,7 +3,7 @@ import { Dropdown } from 'semantic-ui-react'
 
 export default (props) => (
 
-    <Dropdown placeholder='Tags' multiple search selection options={
+    <Dropdown style={TagSelectionStyles} placeholder={props.placeholder} multiple search selection options={
         props.tags.map((tag, index) => {
             return {
                 key: index,
@@ -14,3 +14,8 @@ export default (props) => (
     }
         onChange={props.onItemAdded} />
 )
+
+// Styles
+const TagSelectionStyles = {
+    width: '100%'
+}

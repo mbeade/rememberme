@@ -29,17 +29,17 @@ class CreateTag extends React.Component {
 
     render() {
         return <div>
-            <h3>Add Tags</h3>
+            <h3>Create new Tags</h3>
             <Form onSubmit={this.onSubmitHandler.bind(this)}>
                 <Form.Field>
                     <label>Tag name</label>
                     <input name="name" value={this.state.name} onChange={this.onInputChange.bind(this)} placeholder='Enter tag name' />
                 </Form.Field>
                 <Form.Field>
-                    <label>Purpose</label>
+                    <label>Purpose of this</label>
                     <input name="purpose" value={this.state.purpose} onChange={this.onInputChange.bind(this)} placeholder='Enter purpose of this' />
                 </Form.Field>
-                <Button primary type='submit'>Submit</Button>
+                <Button basic type='submit' color='orange'>Save Tag</Button>
             </Form>
         </div>
     }
