@@ -3,9 +3,9 @@ export const CREATE_ARTICLES = 'GET_ALL_ARTICLES';
 
 import databaseRef from '../../firebase/firebase';
 const articlesRef = databaseRef.child("articles");
-
+// getAllArticles it's a func that returns another func that receives dispatch func as a parameter, and calls dispactch inside
 export const getAllArticles = () => {
-    return dispatch => {
+    return (dispatch) => {
         articlesRef.on('value', snapshot => {
             dispatch({
                 type: GET_ALL_ARTICLES,

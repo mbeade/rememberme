@@ -1,14 +1,15 @@
 import React from 'react'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import {createTag } from '../redux/tags/tagsActionCreator';
-
+import { createTag } from '../redux/tags/tagsActionCreator';
+import { COLORS } from '../constants/constants'
 class CreateTag extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             name: '',
-            purpose: ''
+            purpose: '',
+            color: ''
         }
     }
 
@@ -30,17 +31,23 @@ class CreateTag extends React.Component {
     render() {
         return <div>
             <h3>Create new Tags</h3>
-            <Form onSubmit={this.onSubmitHandler.bind(this)}>
-                <Form.Field>
-                    <label>Tag name</label>
-                    <input name="name" value={this.state.name} onChange={this.onInputChange.bind(this)} placeholder='Enter tag name' />
-                </Form.Field>
-                <Form.Field>
-                    <label>Purpose of this</label>
-                    <input name="purpose" value={this.state.purpose} onChange={this.onInputChange.bind(this)} placeholder='Enter purpose of this' />
-                </Form.Field>
-                <Button basic type='submit' color='orange'>Save Tag</Button>
-            </Form>
+            <Segment inverted>
+                <Form inverted onSubmit={this.onSubmitHandler.bind(this)}>
+                    <Form.Field>
+                        <label>Tag name</label>
+                        <input name="name" value={this.state.name} onChange={this.onInputChange.bind(this)} placeholder='Enter tag name' />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Purpose of this</label>
+                        <input name="purpose" value={this.state.purpose} onChange={this.onInputChange.bind(this)} placeholder='Enter purpose of this' />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Color</label>
+                        <input name="color" value={this.state.color} onChange={this.onInputChange.bind(this)} placeholder={COLORS.join(', ')} />
+                    </Form.Field>
+                    <Button basic type='submit' color='orange'>Save Tag</Button>
+                </Form>
+            </Segment>
         </div>
     }
 }
@@ -51,11 +58,4 @@ const mapStateToProps = (state) =>
         nextTagKey: state.tags.index
     });
 
-const mapDispatchToProps = (dispatch) =>
-    ({
-        createTag: (tag, nextKey) => {
-            dispatch(createTag(tag, nextKey));
-        }
-    });
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTag);
+export default connect(mapStateToProps, { createTag })(CreateTag);

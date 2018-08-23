@@ -12,6 +12,8 @@ import CreateArticle from './article.create.component';
 import '../styles.css';
 import { Container } from 'semantic-ui-react'
 import firebase from "firebase";
+import { arrayContainsAnotherArray } from '../utils/utils';
+
 
 class App extends React.Component {
 
@@ -21,7 +23,7 @@ class App extends React.Component {
             articles: []
         }
 
-        // Anonymous auith
+        // Anonymous Firebase auth
         firebase.auth().signInAnonymously().catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -29,30 +31,25 @@ class App extends React.Component {
         });
     }
 
-    arrayContainsAnotherArray(needle, haystack) {
-        for (var i = 0; i < needle.length; i++) {
-            if (haystack.indexOf(needle[i]) === -1)
-                return false;
-        }
-        return true;
-    }
-
 
     onItemAddedHandler(event, data) {
         console.log(data.value);
-        let result = this.props.articles.filter((a) => { return this.arrayContainsAnotherArray(data.value, a.tags) });
+        let result = this.props.articles.filter((a) => { return arrayContainsAnotherArray(data.value, a.tags) });
         this.setState({
             articles: result
         });
     }
 
+    cardClicked(url, a, b) {
+        window.open(url, "_blank");
+    }
+
     render() {
         return <div>
-
             <Container style={ContainerStyles}>
                 <TagSelection tags={this.props.tagsList} onItemAdded={this.onItemAddedHandler.bind(this)} placeholder="Search using tags!"></TagSelection>
                 <div className="ui divider"></div>
-                <ArticlesList articles={this.state.articles} />
+                <ArticlesList articles={this.state.articles} cardSelectedAction={this.cardClicked.bind(this)} />
                 <div className="ui divider"></div>
                 <CreateTag />
                 <div className="ui divider"></div>
@@ -86,15 +83,6 @@ const mapStateToProps = (state) =>
         articles: state.articles.articles
     });
 
-const mapDispatchToProps = (dispatch) =>
-    ({
-        getAllTags: () => {
-            dispatch(getAllTags());
-        },
-        getAllArticles: () => {
-            dispatch(getAllArticles());
-        },
-    });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, { getAllTags, getAllArticles })(App);
 
